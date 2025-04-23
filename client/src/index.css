@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Ensure anchors account for fixed header */
+  }
+  
+  /* Hide scrollbar but keep functionality */
+  body::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background: transparent;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+  }
+  
+  /* Improved mobile typography */
+  h1 {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
+  }
+  
+  h2 {
+    @apply text-xl sm:text-2xl md:text-3xl;  
+  }
+  
+  p {
+    @apply text-base sm:text-lg;
+  }
+}
+
+@layer components {
+  /* Section fade in animation */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Theme transition */
+  .theme-transition {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Project card hover effect */
+  .project-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* 3D canvas container */
+  .hero-3d-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  
+  .dark .dark-bg-gradient {
+    background: linear-gradient(to bottom, rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.95) 70%);
+  }
+  
+  .light-bg-gradient {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.95) 70%);
+  }
+  
+  /* Cube styles */
+  .cube-container {
+    perspective: 1000px;
+    width: 140px;
+    height: 140px;
+  }
+  
+  @media (max-width: 640px) {
+    .cube-container {
+      width: 120px;
+      height: 120px;
+    }
+  }
+  
+  .cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+  }
+  
+  .cube-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+  
+  /* Mobile menu improvements */
+  .mobile-menu {
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  
+  /* Improved section spacing for mobile */
+  @media (max-width: 640px) {
+    section {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+    
+    .hero-section {
+      padding-top: 100px;
+    }
+    
+    /* Allow limited blur effect but optimize for mobile */
+    header {
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+  }
+  
+  /* Easter egg animations */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  @keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .easter-egg-hint {
+    animation: float 2s ease-in-out infinite, pulse 1.5s ease-in-out infinite;
+  }
+  
+  .about-img-clickable {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .about-img-clickable::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(59, 130, 246, 0) 0%, rgba(59, 130, 246, 0.2) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .about-img-clickable:hover::after {
+    opacity: 1;
+  }
+}
